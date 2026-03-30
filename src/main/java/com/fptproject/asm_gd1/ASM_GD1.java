@@ -67,7 +67,7 @@ public class ASM_GD1 {
                     studentService.showList(students);
                     break;
                 case 3: 
-                    studentService.deleteById(students);
+                    studentService.deleteById(students, studentMap, emails);
                     break;
                 case 4: 
                     studentService.findAllByName(students);
@@ -84,6 +84,9 @@ public class ASM_GD1 {
                     
                 case 8: 
                     studentService.initSample(students, studentMap, emails);
+                    break;
+                case 9: 
+                    studentService.showMailSet(emails);
                     break;
                 case 0: 
                     System.out.println("See you again");

@@ -79,12 +79,18 @@ public class StudentService {
         });
     }
 
-    public void deleteById(List<Student> students) {
+    public void deleteById(List<Student> students, Map<String, Student> studentMap, Set<String> emails) {
 
         System.out.println("Please type your student's id");
         Scanner sc = ip.getScaner();
         String id = sc.nextLine();
-        students.removeIf(student -> student.getId().equals(id));
+        Optional<Student> stdOptional = students.stream().filter(std -> std.getId().equals(id)).findFirst(); 
+        if(stdOptional.isPresent()){
+            Student std = stdOptional.get(); 
+            studentMap.remove(std.getId()); 
+            students.remove(std); 
+            emails.remove(std.getId()); 
+        }
         System.out.println("Delete student successfully!");
     }
 
@@ -169,6 +175,7 @@ public class StudentService {
         studentMap.put(s3.getId(), s3);
         Student s1 = new Student("S1", "Nguyen Van A", 12, "nguyenvana@gmail.com", 10);
         students.add(s1);
+        emails.add(s1.getEmail());
         studentMap.put(s1.getId(), s1);
         Student s2 = new Student("S2", "Nguyen Van C", 19, "cvannguyen1998@gmail.com", 10);
         students.add(s2);
